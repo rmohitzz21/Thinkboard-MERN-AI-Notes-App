@@ -1,5 +1,7 @@
 
+import { getSummaryFromPerplexity } from "../ai/perplexity.js";
 import Note from "../models/Notes.js";
+
 export async function getNotes(req,res){
     
     try {
@@ -18,8 +20,13 @@ export async function createNotes (req,res)  {
         const {title, content} = req.body;
         if(!title || !content){
             return res.status(400).json({message: "Title and content are required"});
+
         }
-        const NewNote = new Note({title, content});
+
+        const summary = await getSummaryFromPerplexity(content) || "Summary unavailable";
+
+
+        const NewNote = new Note({title, content, summary});
 
         await NewNote.save()
         res.status(201).json({message: "Note Created Successfully", note: NewNote});    
@@ -64,5 +71,20 @@ export async function deleteNotes(req,res) {
     } catch (error) {
         console.log("Error : ", error);
         res.status(500).json({message: "Error deleting note", error: error.message});
+    }
+}
+
+export async function getNoteById(req,res){
+    try {
+        const note = await Note.findById(req.params.id);
+
+        if(!note) return res.status(404).json({
+            message: "Note Not Found"
+        });
+        res.json(note); 
+    } catch (error) {
+        
+        console.error("Error in GetNoteById controoler",error);
+        res.status(500).json({message : "Internal server Error"});
     }
 }

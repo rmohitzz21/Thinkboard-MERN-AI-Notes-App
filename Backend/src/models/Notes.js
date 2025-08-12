@@ -9,6 +9,10 @@ const noteSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+     summary: {
+      type: String,       // AI-generated summary field
+      default: "",        // empty string if not yet generated
+    },
     
 
 

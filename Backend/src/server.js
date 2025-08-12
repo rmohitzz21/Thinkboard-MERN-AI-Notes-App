@@ -2,20 +2,24 @@
 // const express = require('express');
 import express from "express";
 import notesRoutes from "./routes/notesRoutes.js";
-
-import { connectDb } from "./config/db.js";
 import dotenv from "dotenv";
+import { connectDb } from "./config/db.js";
 import rateLimiter from "../middleware/rateLimiter.js";
+import cors from 'cors';
 
 dotenv.config();
 const app = express();
 
 
+app.use(cors({
+    origin: 'http://localhost:5173',
+}));  
 
 // Middleware to parse JSON bodies
 
 app.use(express.json()); 
-app.use(rateLimiter);          
+app.use(rateLimiter); 
+       
 
 
 // Custom middleware 

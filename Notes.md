@@ -1,3 +1,12 @@
+echo "# MERN-THINKBOARD" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/rmohitzz21/MERN-THINKBOARD.git
+git push -u origin main
+
+
 MERN - > 
 
 DataBase --- Mongo DB
@@ -60,3 +69,36 @@ DELETE
 400 = Client Error
 500 - Server Error
 
+
+
+
+-- Middleware
+
+is used for auth check ?
+
+
+
+==Rate Limiting 
+
+Rate Limit is a way to control how often someone can do something on a websit or app like how many times they can refersh page make a reauest to an API or tey to login.
+
+Only 100 req per User Every 15 min
+
+
+429 -> Too Many Request
+
+
+
+<!-- Upstash -->
+
+
+
+<!-- Fetch | axios -->
+
+
+ 
+
+ --Cors is Browser Security Rule 
+
+2:41:52
+304
